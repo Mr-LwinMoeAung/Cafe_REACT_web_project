@@ -18,7 +18,7 @@ export default function Topping() {
                         <div className="modify-table">
                             <table>
                                 <tr>
-                                    <th>Id</th>
+                                    {/* <th>Id</th> */}
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Edit</th>
@@ -29,7 +29,7 @@ export default function Topping() {
                                         toppings.map((t) =>
                                         (
                                             <tr key={t.Id}>
-                                                <td>{t.Id}</td>
+                                                {/* <td>{t.Id}</td> */}
                                                 <td>{t.name}</td>
                                                 <td>{t.price}</td>
                                                 <td>

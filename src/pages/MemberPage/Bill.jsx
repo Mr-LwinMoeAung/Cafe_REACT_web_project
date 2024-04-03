@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-export default function Bill({ menu, response, topping, setResponse }) {
+export default function Bill({ menu, handleResponse, topping, setHandleResponse }) {
     const [menuNames, setMenuNames] = useState([])
     const [price, setPrice] = useState([])
     const [toppingPrice, setToppingPrice] = useState([])
@@ -23,7 +23,7 @@ export default function Bill({ menu, response, topping, setResponse }) {
                     }
                 }
             ).then((response) => {
-                setResponse([])
+                setHandleResponse([])
                 setTaxCost(0)
                 setTotalItemCost(0)
                 console.log("response", response)
@@ -44,9 +44,13 @@ export default function Bill({ menu, response, topping, setResponse }) {
                         Authorization: `${token}`
                     }
                 }
-            ).then((response) => {
-                window.location.href = '/member'
-                console.log("response", response)
+            ).then(() => {
+                //window.location.href = '/member'
+                if (Array.isArray(handleResponse)) {
+                    setHandleResponse(handleResponse.filter((hr) => hr.Id !== id));
+                  }
+                console.log("response = ", id)
+                console.log("handleResponse", handleResponse)
             })
         }
         catch (error) {
@@ -54,10 +58,10 @@ export default function Bill({ menu, response, topping, setResponse }) {
         }
     };
 
-    const postOrder = async (response) => {
+    const postOrder = async (handleResponse) => {
         try {
             // Iterate over each item in the cart
-            for (const item of response) {
+            for (const item of handleResponse) {
                 // Create the payload object for the POST request
                 const payload = {
                     user_id: item.user_id,
@@ -92,7 +96,7 @@ export default function Bill({ menu, response, topping, setResponse }) {
     let removeCartRendered = false
     useEffect(() => {
         console.log("Response changed")
-    }, [response])
+    }, [handleResponse])
 
     useEffect(() => {
         const menuNameMap = {}
@@ -120,10 +124,10 @@ export default function Bill({ menu, response, topping, setResponse }) {
     }, [menu])
 
     useEffect(() => {
-        console.log(response)
+        console.log(handleResponse)
         let value = 0
         let tvalue = 0
-        response ? (response.map((r) => {
+        handleResponse? (handleResponse.map((r) => {
             let itemPrice = price[r.menu_id] * r.quantity
             r.topping ? (r.topping.map((tp) => {
                 tvalue =tvalue+ toppingPrice[tp] * r.quantity
@@ -134,13 +138,13 @@ export default function Bill({ menu, response, topping, setResponse }) {
         setTaxCost(totalItemCost * 0.1)
         setTotalToppingPrice(tvalue)
         setTotal(totalItemCost + taxCost+totalToppingPrice)
-    }, [response, price])
+    }, [handleResponse, price])
 
     return (
         <div className="bills-part">
             <h3 className="bills-header">Bills</h3>
             {
-                response ? response.map((r) => (
+                handleResponse? (handleResponse.map((r) => (
                     <div className="bills-coffee" key={r.Id}>
                         <img
                             className="bills-coffee-img"
@@ -167,11 +171,11 @@ export default function Bill({ menu, response, topping, setResponse }) {
                         </div>
                     </div>
 
-                )) : ('')
+                ))) : ('')
             }
 
             {
-                removeCartRendered && response ? (
+                removeCartRendered && handleResponse? (
                     <div className="bills-cart">
                         <a href="#" className="remove-cart" onClick={() => deleteAllItem()}>Remove Cart</a>
                     </div>
@@ -187,7 +191,7 @@ export default function Bill({ menu, response, topping, setResponse }) {
             </div>
 
             <div className="payment">
-                <h1>Payment Method</h1>
+                {/* <h1>Payment Method</h1>
                 <div className="payment-methods">
                     <div className="payment-cash">
                         <a className="payment-a" href="#">
@@ -213,8 +217,8 @@ export default function Bill({ menu, response, topping, setResponse }) {
                             <p>E-Wallet</p>
                         </a>
                     </div>
-                </div>
-                <a className="add-t-b-a" onClick={() => postOrder(response)}>
+                </div> */}
+                <a className="add-t-b-a" onClick={() => postOrder(handleResponse)}>
                     <p className="add-to-billing">Order Now</p>
                 </a>
             </div>

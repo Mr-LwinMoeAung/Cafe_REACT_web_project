@@ -15,8 +15,6 @@ export default function Navbar() {
         setIsDropDownOpen(!isDropdownOpen)
     }
 
-
-
     return (
         <div className="nav-section">
             <div className="logo"><a href="/"><img src="./src/assets/img/logo_coffe.svg" alt="coffee logo" /></a></div>
@@ -31,7 +29,7 @@ export default function Navbar() {
             {
                 userProfile ? (
                     <div className="right-nav">
-                        <div className="cart"><a href="#"><img src="./src/assets/img/shopping_cart.png" alt="shopping_cart" /></a></div>
+                        {/* <div className="cart"><a href="/member"><img src="./src/assets/img/shopping_cart.png" alt="shopping_cart" /></a></div> */}
                         <div className="profile" onMouseEnter={toggleDropdown} onMouseLeave={toggleDropdown}>
                             <a className='profile-img' href="#"><img src="./src/assets/img/profile-user.png" alt="Profile" /></a>
                             <a href="#" className='profile-header'>Welcome, {userProfile.username}</a>

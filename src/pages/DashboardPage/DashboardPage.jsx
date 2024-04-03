@@ -106,8 +106,8 @@ export default function DashboardPage() {
                         <div class="modify-table">
                             <table>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>User Id</th>
+                                    {/* <th>Id</th>
+                                    <th>User Id</th> */}
                                     <th>Name</th>
                                     <th>Menu</th>
                                     <th>Toppings</th>
@@ -124,8 +124,8 @@ export default function DashboardPage() {
                                             (o.status == "pending") ?
                                                 (
                                                     <tr>
-                                                        <td>{o.Id}</td>
-                                                        <td>{o.user_id}</td>
+                                                        {/* <td>{o.Id}</td>
+                                                        <td>{o.user_id}</td> */}
                                                         <td>{allUser?.find(item => item.Id === o.user_id)?.username}</td>
                                                         <td>{menu?.find(item => item.Id === o.menu_id)?.name}</td>
                                                         <td>{getToppingName(o.topping)}</td>
@@ -154,8 +154,8 @@ export default function DashboardPage() {
                         <div class="modify-table">
                             <table>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>User Id</th>
+                                    {/* <th>Id</th>
+                                    <th>User Id</th> */}
                                     <th>Name</th>
                                     <th>Menu</th>
                                     <th>Toppings</th>
@@ -170,8 +170,8 @@ export default function DashboardPage() {
                                             (o.status == "completed") ?
                                                 (
                                                     <tr>
-                                                        <td>{o.Id}</td>
-                                                        <td>{o.user_id}</td>
+                                                        {/* <td>{o.Id}</td>
+                                                        <td>{o.user_id}</td> */}
                                                         <td>{allUser?.find(item => item.Id === o.user_id)?.username}</td>
                                                         <td>{menu?.find(item => item.Id === o.menu_id)?.name}</td>
                                                         <td>{getToppingName(o.topping)}</td>

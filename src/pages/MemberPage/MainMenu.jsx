@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from 'react'
-export default function MainMenu({ cart, setCart, menu, topping, category }) {
+export default function MainMenu({ menu, topping, category,handleResponse,setHandleResponse }) {
 
     const [selectedCategory, setSelectedCategory] = useState("")
     const [count, setCount] = useState([])
@@ -15,10 +15,7 @@ export default function MainMenu({ cart, setCart, menu, topping, category }) {
         }
     }, [menu]);
 
-    const handleChange = (event) => {
-        setInputValue(event.target.value);
-      };
-
+   
     const handlePositiveChange = (menuId, newCount) => {
         setCount(prevCount => ({
             ...prevCount,
@@ -61,45 +58,34 @@ export default function MainMenu({ cart, setCart, menu, topping, category }) {
         setSelectedTopping(newSelectedTopping);
     };
 
-    const handleAddToCart = (menuId) => {
-        const index = [...selectedTopping].findIndex((item) => item.menuItemId === menuId);
-        console.log("index", index)
-        const newItem = {
-            menuId: menuId,
-            quantity: count[menuId],
-            topping: selectedTopping?.[index]?.['toppingIds'] || [],
-            comment: ""
-        }
-        setCart(prevCart => [...prevCart, newItem])
-    }
-
-    const postCartToAPI = async (cart) => {
+    const postCartToAPI = async (menuId) => {
         try {
-            // Iterate over each item in the cart
-            for (const item of cart) {
-                // Create the payload object for the POST request
-                const payload = {
-                    menu_id: item.menuId,
-                    quantity: item.quantity,
-                    topping: item.topping,
-                    comment: item.comment
-                };
-
-                // Make the POST request to the API endpoint
-                const token = window.localStorage.getItem('token')
-                const response = await axios.post('https://bubble-tea-cafe-api-production.up.railway.app/api/auth/add-to-cart', payload,
-                    {
-                        headers: {
-                            Authorization: `${token}`
-                        }
-                    }
-                ).then((response) => {
-                    console.log('Item posted successfully:', response.data);
-                    window.location.href = "/member"
-                    setCart([])
-                });
-
+            const index = [...selectedTopping].findIndex((item) => item.menuItemId === menuId);
+            console.log("index", index)
+            const newItem = {
+                menu_id: menuId,
+                quantity: count[menuId],
+                topping: selectedTopping?.[index]?.['toppingIds'] || [],
+                comment: ""
             }
+
+            // Make the POST request to the API endpoint
+            const token = window.localStorage.getItem('token')
+            await axios.post('https://bubble-tea-cafe-api-production.up.railway.app/api/auth/add-to-cart', newItem,
+                {
+                    headers: {
+                        Authorization: `${token}`
+                    }
+                }
+            ).then((response) => {
+                console.log('Item posted successfully:', response.data.data);
+                setHandleResponse(prevHandleResponse => [...prevHandleResponse,response.data.data])
+                console.log(handleResponse)
+                //window.location.href = "/member"
+                //setCart([])
+            });
+
+
         } catch (error) {
             // Handle any errors
             console.error('Error posting cart items:', error);
@@ -107,20 +93,12 @@ export default function MainMenu({ cart, setCart, menu, topping, category }) {
 
     };
 
-    useEffect(() => {
-        postCartToAPI(cart)
-        console.log("cart", cart)
-    }, [cart])
-
     return (
         <section className="main-category">
             <h1>Choose Category</h1>
 
             <div className="item-category">
                 <a href="#" onClick={() => setSelectedCategory("All")}>
-                    {
-                        console.log(selectedCategory)
-                    }
                     <div className="item-menu-list">
                         <p>All</p>
                     </div>
@@ -194,7 +172,7 @@ export default function MainMenu({ cart, setCart, menu, topping, category }) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <a className="add-t-b-a" href="#" onClick={() => handleAddToCart(m.Id)}>
+                                        <a className="add-t-b-a" href="#" onClick={() => postCartToAPI(m.Id)}>
                                             <p className="add-to-billing">Add to Cart</p>
                                         </a>
                                     </div>

@@ -17,7 +17,7 @@ export default function Menu() {
                     <div className="modify-table">
                         <table>
                             <tr>
-                                <th>Id</th>
+                                {/* <th>Id</th> */}
                                 <th>Name</th>
                                 <th>Image</th>
                                 <th>Description</th>
@@ -31,7 +31,7 @@ export default function Menu() {
                                     menu.map((m) =>
                                     (
                                         <tr key={m.Id}>
-                                            <td>{m.Id}</td>
+                                            {/* <td>{m.Id}</td> */}
                                             <td>{m.name}</td>
                                             <td className="row-data-image-block">
                                                 <img className="row-data-image" src={`${m.image}`} alt={`${m.name}`} />

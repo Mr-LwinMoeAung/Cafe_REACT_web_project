@@ -10,12 +10,7 @@ export default function MemberPage() {
     const user = useUserProfile()
     const menu = useMenu()
     const [cart, setCart] = useState([])
-    const [response, setResponse] = useState([])
-    useEffect(() => {
-        if (user && user.cart) {
-            setResponse(user.cart)
-        }
-    }, [user])
+    const [handleResponse, setHandleResponse] = useState([])
 
     return (
         <>
@@ -25,9 +20,8 @@ export default function MemberPage() {
                     topping={topping}
                     category={category}
                     menu={menu}
-                    cart={cart} setCart={setCart}
                     user={user}
-                    response={response} setResponse={setResponse}
+                    handleResponse={handleResponse} setHandleResponse={setHandleResponse}
                 />
 
                 <article className="side">
@@ -43,7 +37,7 @@ export default function MemberPage() {
 
                     </div>
 
-                    <Bill user={user} cart={cart} response={response} setResponse={setResponse} menu={menu} topping={topping} />
+                    <Bill user={user} cart={cart} handleResponse={handleResponse} setHandleResponse={setHandleResponse} menu={menu} topping={topping} />
                 </article>
             </div>
         </>
