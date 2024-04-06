@@ -1,7 +1,7 @@
 .item-menu-part {
     background-color: white;
-    width: 95%;
     margin: 20px 0 40px 0;
+    padding:0 20px;
 
     .modify-table {
         padding: 1.2vw;
@@ -42,6 +42,7 @@
     }
 
     .table-btn {
+        cursor: pointer;
         padding: 10px 8px;
         border-radius: 10px;
         border: 1px solid #fff;

@@ -85,10 +85,33 @@
             }
         }
 
+
         .item-order-part {
             background-color: white;
-            width: 95%;
             margin: 20px 0;
+
+            .item-order-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0px 20px 0 0;
+                padding-top: 10px;
+            }
+
+            .item-sort-button {
+                padding: 10px 10px;
+                background-color: #1472D8;
+                border-radius: 10px;
+                border: 1px solid #fff;
+                color: #fff;
+            }
+
+            .item-sort-button:hover {
+                background-color: #fff;
+                color: #1472D8;
+                transition: 0.2s ease-in-out;
+                border: 1px solid #fff;
+            }
 
             .modify-table {
                 padding: 1.2vw;
@@ -127,30 +150,32 @@
                 padding: 20px 5px;
                 overflow-x: auto;
 
-                .update-order-btn{
+                .update-order-btn {
                     padding: 10px 5px;
-                    background-color:#008940;
+                    background-color: #008940;
                     border-radius: 10px;
                     border: 1px solid #fff;
                     color: #fff;
-                } 
+                    cursor: pointer;
+                }
 
-                .update-order-btn:hover{
+                .update-order-btn:hover {
                     background-color: #fff;
                     color: #008940;
                     transition: 0.2s ease-in-out;
                     border: 1px solid #008940;
                 }
-                
-                .delete-order-btn{
+
+                .delete-order-btn {
                     padding: 10px 5px;
-                    background-color:#F10000;
+                    background-color: #F10000;
                     border-radius: 10px;
                     border: 1px solid #fff;
                     color: #fff;
+                    cursor: pointer;
                 }
 
-                .delete-order-btn:hover{
+                .delete-order-btn:hover {
                     background-color: #fff;
                     color: #F10000;
                     transition: 0.2s ease-in-out;

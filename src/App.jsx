@@ -17,10 +17,8 @@ import DeleteCategory from './pages/DashboardPage/Category/DeleteCategory'
 import CreateTopping from './pages/DashboardPage/Topping/CreateTopping'
 import EditTopping from './pages/DashboardPage/Topping/EditTopping'
 import DeleteTopping from './pages/DashboardPage/Topping/DeleteTopping'
-import UpdateOrderStatus from './pages/DashboardPage/Order/UpdataOrderStatus'
 import MemberPage from './pages/MemberPage/MemberPage'
 import OrderPage from './pages/MemberPage/OrderPage'
-import DeleteOrder from './pages/DashboardPage/Order/DeleteOrder'
 import Category from './pages/DashboardPage/Category/Category'
 import Topping from './pages/DashboardPage/Topping/Topping'
 import Menu from './pages/DashboardPage/Menu/Menu'
@@ -77,8 +75,6 @@ function App() {
                     <Route path='/dashboard/topping/createTopping' element={<CreateTopping />} />
                     <Route path='/dashboard/topping/editTopping/:id' element={<EditTopping />} />
                     <Route path='/dashboard/topping/deleteTopping/:id' element={<DeleteTopping />} />
-                    <Route path='/dashboard/order/updateOrder/:id' element={<UpdateOrderStatus />} />
-                    <Route path='/dashboard/order/deleteOrder/:id' element={<DeleteOrder />} />
                     <Route path="*" element={<Navigate to="/" />} />
                   </>
                 ) : (userProfile?.role == "customer") ? (

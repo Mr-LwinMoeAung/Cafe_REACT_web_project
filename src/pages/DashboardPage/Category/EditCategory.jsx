@@ -9,7 +9,6 @@ export default function EditCategory() {
     const category = useCategory()
     const { id } = useParams()
     const [name, setName] = useState("")
-    console.log(category)
 
     useEffect(() => {
         if (category) {
@@ -19,7 +18,7 @@ export default function EditCategory() {
             ) : ("")
         }
         console.log(name)
-    },[category,id])
+    },[id])
 
     const handleSubmit = async (e) => {
         e.preventDefault()

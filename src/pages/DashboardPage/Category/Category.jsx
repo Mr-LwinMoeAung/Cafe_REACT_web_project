@@ -3,9 +3,30 @@ import AdminNavbar from "../../../components/Admin/AdminNavbar";
 import { useCategory } from "../../../layouts/BaseLayout";
 import './Category.css'
 import UpperNavbar from "../../../components/Admin/UpperNavbar";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Category() {
     const categories = useCategory()
+    const deleteItem = async (id) => {
+        try {
+            const token = window.localStorage.getItem('token')
+            axios.delete(
+                `https://bubble-tea-cafe-api-production.up.railway.app/api/category/${id}`,
+                {
+                    headers: {
+                        Authorization: `${token}`
+                    }
+                }
+            ).then((response) => {
+                console.log(response)
+            })
+        }
+        catch (error) {
+            console.log(error)
+        }
+    };
+
     return (
         <>
             <div className="category-table">
@@ -16,29 +37,35 @@ export default function Category() {
                         <h3>Categories</h3>
                         <div className="modify-table">
                             <table>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                                {
-                                    categories ? (
-                                        categories.map((c) =>
-                                        (
-                                            <tr key={c.Id}>
-                                                <td>{c.Id}</td>
-                                                <td>{c.name}</td>
-                                                <td>
-                                                    <Link className='table-btn edit-category-btn' to={`/dashboard/category/editCategory/${c.Id}`}>Edit</Link>
-                                                </td>
-                                                <td>
-                                                    <Link className='table-btn delete-category-btn' to={`/dashboard/category/deleteCategory/${c.Id}`}>Delete</Link>
-                                                </td>
-                                            </tr>
-                                        )
-                                        )) : ('No Category')
-                                }
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        categories ? (
+                                            categories.map((c) =>
+                                            (
+                                                <tr key={c.Id}>
+                                                    <td>{c.name}</td>
+                                                    <td>
+                                                        <Link className='table-btn edit-category-btn' to={`/dashboard/category/editCategory/${c.Id}`}>Edit</Link>
+                                                    </td>
+                                                    <td>
+                                                        <a className="table-btn delete-category-btn" onClick={() => deleteItem(c.Id)}>Delete</a>
+                                                    </td>
+                                                </tr>
+                                            )
+                                            )) : (<tr>
+                                            <td colSpan="3">
+                                                No Category
+                                            </td>
+                                        </tr>)
+                                    }
+                                </tbody>
                             </table>
                         </div>
                         <div className="table-create-category">

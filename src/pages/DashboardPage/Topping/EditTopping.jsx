@@ -22,9 +22,8 @@ export default function EditTopping() {
                 });
             }
         }
-    }, [topping, id]); 
+    }, [id]); 
 
-    console.log("FormData",formData)
 
     const handleChange = (e) => {
         const value = e.target.value

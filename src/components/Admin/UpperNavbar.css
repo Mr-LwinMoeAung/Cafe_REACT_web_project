@@ -13,12 +13,20 @@
 }
 
 .upper-nav-inside {
+    padding: 10px 20px;
+    display: flex;
     width: 100%;
-    padding: 1.5%;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h1 {
     display: inline-block;
+}
+
+.user-profile-link{
+    display: flex;
+    justify-content: end;
 }
 
 .user-profile-link:hover {
@@ -26,9 +34,7 @@ h1 {
 }
 
 .user-profile-img {
-    float: right;
     border: 1px solid black;
-    vertical-align: middle;
-    width: 3%;
+    width: 40px;
     border-radius: 30px;
 }
