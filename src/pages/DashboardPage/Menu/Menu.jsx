@@ -6,7 +6,7 @@ import UpperNavbar from "../../../components/Admin/UpperNavbar"
 import axios from "axios"
 
 export default function Menu() {
-    const menu = useMenu()
+    const [menu,setMenu] = useMenu()
     const deleteItem = async (id) => {
         try{
             const token = window.localStorage.getItem('token')
@@ -18,7 +18,9 @@ export default function Menu() {
                     }
                 }
             ).then((response)=>{
-                console.log(response)
+                if (response.status === 200) {
+                    setMenu(prevMenu => prevMenu.filter(item => item.Id !== id));
+                }
             })
         }
         catch(error){

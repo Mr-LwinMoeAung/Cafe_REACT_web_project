@@ -7,7 +7,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Category() {
-    const categories = useCategory()
+    const [categories,setCategories] = useCategory()
     const deleteItem = async (id) => {
         try {
             const token = window.localStorage.getItem('token')
@@ -20,6 +20,9 @@ export default function Category() {
                 }
             ).then((response) => {
                 console.log(response)
+                if (response.status === 200) {
+                    setCategories(prevMenu => prevMenu.filter(item => item.Id !== id));
+                }
             })
         }
         catch (error) {

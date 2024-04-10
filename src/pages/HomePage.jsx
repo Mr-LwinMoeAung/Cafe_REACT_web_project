@@ -2,13 +2,11 @@ import "../App.css"
 import Banner from "../components/Banner/Banner"
 import Card from "../components/Card/Card"
 import Img_Hero from "../components/Img-Hero/Img_Hero"
-import { useMenu, useUserProfile } from "../layouts/BaseLayout"
+import { useMenu} from "../layouts/BaseLayout"
 export default function HomePage() {
-    const user = useUserProfile()
-    const menu = useMenu()
+    const [menu] = useMenu()
     return (
         <>
-        {console.log(user?.role)}
             <div id='home' className="main-bg-img">
                 <div className="container">
                     <div className="hero">
@@ -36,7 +34,7 @@ export default function HomePage() {
                         <div className="title">Popular <span>Now</span></div>
                         <div className="cards">
                             {menu ?
-                                (menu.slice(-3).map((m) => <Card rating={"4.9"} name={m.name} price={m.price} img={m.image} description={m.description} />))
+                                (menu.slice(-3).map((m) => <Card key={m.Id} rating={"4.9"} name={m.name} price={m.price} img={m.image} description={m.description} />))
                                 : ("No item in the menu list")}
                         </div>
                     </div>

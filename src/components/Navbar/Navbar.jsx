@@ -9,7 +9,7 @@ export const handleLogout = () => {
 }
 
 export default function Navbar() {
-    const userProfile = useUserProfile()
+    const [userProfile,setUserProfile] = useUserProfile()
     const [isDropdownOpen, setIsDropDownOpen] = useState(false)
     const toggleDropdown = () => {
         setIsDropDownOpen(!isDropdownOpen)

@@ -138,7 +138,7 @@ export default function Bill({ menu, handleResponse, topping, setHandleResponse 
         setTaxCost(totalItemCost * 0.1)
         setTotalToppingPrice(tvalue)
         setTotal(totalItemCost + taxCost+totalToppingPrice)
-    }, [handleResponse, price])
+    }, [handleResponse])
 
     return (
         <div className="bills-part">

@@ -2,13 +2,12 @@ import Footer from "../components/Footer/Footer";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import axios from "axios";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const UserProfileContext = createContext()
 const MenuContext = createContext()
 const ToppingContext = createContext()
 const CategoryContext = createContext()
-const OrderContext = createContext()
 
 function Layout() {
     const [userProfile, setUserProfile] = useState(null)
@@ -67,13 +66,13 @@ function Layout() {
         getTopping()
         getMenu()
         getUserProfile()
-    }, [category],[menu],[userProfile],[topping])
+    }, [])
 
     return (
-        <CategoryContext.Provider value={category}>
-            <ToppingContext.Provider value={topping}>
-                <MenuContext.Provider value={menu}>
-                    <UserProfileContext.Provider value={userProfile}>
+        <CategoryContext.Provider value={[category,setCategory]}>
+            <ToppingContext.Provider value={[topping,setTopping]}>
+                <MenuContext.Provider value={[menu,setMenu]}>
+                    <UserProfileContext.Provider value={[userProfile,setUserProfile]}>
                         {
                             isMemberPage ? (
                                 <Outlet />

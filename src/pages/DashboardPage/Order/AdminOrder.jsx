@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-export default function AdminOrder({ allUser, menu, getToppingName, order }) {
-    const [formData, setFormData] = useState(null)
+export default function AdminOrder({ allUser, menu, getToppingName, order,setOrder}) {
     const [sort, setSort] = useState('Latest')
     const token = window.localStorage.getItem('token')
 
@@ -22,18 +21,23 @@ export default function AdminOrder({ allUser, menu, getToppingName, order }) {
         )
             .then((response) => {
                 console.log("order_status", response)
+                if (response.status === 200) {
+                    setOrder(prevMenu => prevMenu.filter(item => item.Id !== orderItem.Id));
+                }
             })
     }
 
     const handleSubmit = async (orderItem) => {
-        setFormData({
+        console.log("o =",orderItem)
+        const formData = {
             user_id: orderItem.user_id,
             menu_id: orderItem.menu_id,
             topping: orderItem.topping,
             quantity: orderItem.quantity,
             total: orderItem.total,
             status: "completed"
-        })
+        }
+        console.log(formData)
         axios.put(
             `https://bubble-tea-cafe-api-production.up.railway.app/api/order/${orderItem.Id}`,
             formData,
@@ -49,13 +53,13 @@ export default function AdminOrder({ allUser, menu, getToppingName, order }) {
     }
     return (
         <>
-            <div id="C4" class="item-order-part">
+            <div id="C4" className="item-order-part">
                 <div className="item-order-header">
                     <h3>Pending Orders</h3>
                     <a onClick={() => handleSort()} className="item-sort-button" >Sort {sort}</a>
                 </div>
 
-                <div class="modify-table">
+                <div className="modify-table">
                     <table>
                         <thead>
                             <tr>
@@ -71,26 +75,25 @@ export default function AdminOrder({ allUser, menu, getToppingName, order }) {
                         </thead>
                         <tbody>
                             {
-                                order ? (
+                                order && order.some((o) => o.status == "pending") ? (
                                     //todo split pending orders and completed orders
-                                    order.map((o) =>
-                                        (o.status == "pending")?.
-                                            (
-                                                <tr key={o.Id}>
-                                                    <td>{allUser?.find(item => item.Id === o.user_id)?.username}</td>
-                                                    <td>{menu?.find(item => item.Id === o.menu_id)?.name}</td>
-                                                    <td>{getToppingName(o.topping)}</td>
-                                                    <td>{o.quantity}</td>
-                                                    <td>{o.total}</td>
-                                                    <td>{o.status}</td>
-                                                    <td>
-                                                        <a className="update-order-btn" onClick={() => handleSubmit(o)}>Update</a>
-                                                    </td>
-                                                    <td>
-                                                        <a className='delete-order-btn' onClick={() => deleteOrder(o)}>Delete</a>
-                                                    </td>
-                                                </tr>
-                                            )
+                                    order.map((o) => (o.status=="pending")?
+                                    (
+                                        <tr key={o.Id}>
+                                            <td>{allUser?.find(item => item.Id === o.user_id)?.username}</td>
+                                            <td>{menu?.find(item => item.Id === o.menu_id)?.name}</td>
+                                            <td>{getToppingName(o.topping)}</td>
+                                            <td>{o.quantity}</td>
+                                            <td>{o.total}</td>
+                                            <td>{o.status}</td>
+                                            <td>
+                                                <a className="update-order-btn" onClick={() => handleSubmit(o)}>Update</a>
+                                            </td>
+                                            <td>
+                                                <a className='delete-order-btn' onClick={() => deleteOrder(o)}>Delete</a>
+                                            </td>
+                                        </tr>
+                                    ):null
                                     )
                                 ) : <tr>
                                     <td colSpan='8'>No Pending Order</td>
@@ -121,22 +124,21 @@ export default function AdminOrder({ allUser, menu, getToppingName, order }) {
                         </thead>
                         <tbody>
                             {
-                                order ? (
-                                    order.map((o) =>
-                                        (o.status == "completed") ?
-                                            (
-                                                <tr key={o.Id}>
-                                                    <td>{allUser?.find(item => item.Id === o.user_id)?.username}</td>
-                                                    <td>{menu?.find(item => item.Id === o.menu_id)?.name}</td>
-                                                    <td>{getToppingName(o.topping)}</td>
-                                                    <td>{o.quantity}</td>
-                                                    <td>{o.total}</td>
-                                                    <td>{o.status}</td>
-                                                    <td>
-                                                        <a className='delete-order-btn' onClick={() => deleteOrder(o)}>Delete</a>
-                                                    </td>
-                                                </tr>
-                                            ) : ('')
+                                order && order.some((o) => o.status == "completed") ? (
+                                    order.map((o) =>(o.status=="completed")?
+                                    (
+                                        <tr key={o.Id}>
+                                            <td>{allUser?.find(item => item.Id === o.user_id)?.username}</td>
+                                            <td>{menu?.find(item => item.Id === o.menu_id)?.name}</td>
+                                            <td>{getToppingName(o.topping)}</td>
+                                            <td>{o.quantity}</td>
+                                            <td>{o.total}</td>
+                                            <td>{o.status}</td>
+                                            <td>
+                                                <a className='delete-order-btn' onClick={() => deleteOrder(o)}>Delete</a>
+                                            </td>
+                                        </tr>
+                                    ):('')
                                     )
                                 ) : <tr>
                                     <td colSpan='7'>No Completed Order</td>

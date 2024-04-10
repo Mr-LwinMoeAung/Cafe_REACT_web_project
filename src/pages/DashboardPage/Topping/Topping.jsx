@@ -6,7 +6,7 @@ import UpperNavbar from "../../../components/Admin/UpperNavbar";
 import axios from "axios";
 
 export default function Topping() {
-    const toppings = useTopping()
+    const [toppings,setToppings] = useTopping()
     const deleteItem = async (id) => {
         try {
             const token = window.localStorage.getItem('token')
@@ -19,6 +19,9 @@ export default function Topping() {
                 }
             ).then((response) => {
                 console.log(response)
+                if (response.status === 200) {
+                    setToppings(prevMenu => prevMenu.filter(item => item.Id !== id));
+                }
             })
         }
         catch (error) {

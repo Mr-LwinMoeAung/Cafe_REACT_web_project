@@ -1,10 +1,10 @@
 import './UpperNavbar.css'
 export default function UpperNavbar() {
-
     return (
         <>
             <div className="upper-nav">
                 <div className="upper-nav-inside">
+
                     <h1>Admin Dashboard</h1>
                     <a className="user-profile-link" href="#">
                         <img

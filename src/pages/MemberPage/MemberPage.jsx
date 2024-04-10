@@ -5,10 +5,10 @@ import MainMenu from './MainMenu'
 import { useEffect, useState } from 'react'
 import Bill from './Bill'
 export default function MemberPage() {
-    const category = useCategory()
-    const topping = useTopping()
-    const user = useUserProfile()
-    const menu = useMenu()
+    const [category] = useCategory()
+    const [topping] = useTopping()
+    const [user] = useUserProfile()
+    const [menu] = useMenu()
     const [cart, setCart] = useState([])
     const [handleResponse, setHandleResponse] = useState([])
 

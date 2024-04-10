@@ -7,10 +7,10 @@ import UpperNavbar from '../../components/Admin/UpperNavbar';
 import AdminOrder from './Order/AdminOrder';
 
 export default function DashboardPage() {
-    const menu = useMenu()
-    const category = useCategory()
-    const topping = useTopping()
-    const user = useUserProfile()
+    const [menu] = useMenu()
+    const [category] = useCategory()
+    const [topping] = useTopping()
+    const [user] = useUserProfile()
     const [allUser, setAllUser] = useState([])
     const [order, setOrder] = useState(null)
     const getOrder = async () => {
@@ -117,7 +117,7 @@ export default function DashboardPage() {
                             </div>
                         </a>
                     </div>
-                    <AdminOrder allUser={allUser} menu={menu} getToppingName={getToppingName} order={order} setOrder={order} />
+                    <AdminOrder allUser={allUser} menu={menu} getToppingName={getToppingName} order={order} setOrder={setOrder} />
                 </section>
             </div>
         </>

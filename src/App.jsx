@@ -10,13 +10,10 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 import DashboardPage from './pages/DashboardPage/DashboardPage'
 import CreateMenu from './pages/DashboardPage/Menu/CreateMenu'
 import EditMenu from './pages/DashboardPage/Menu/EditMenu'
-import DeleteMenu from './pages/DashboardPage/Menu/DeleteMenu'
 import CreateCategory from './pages/DashboardPage/Category/CreateCategory'
 import EditCategory from './pages/DashboardPage/Category/EditCategory'
-import DeleteCategory from './pages/DashboardPage/Category/DeleteCategory'
 import CreateTopping from './pages/DashboardPage/Topping/CreateTopping'
 import EditTopping from './pages/DashboardPage/Topping/EditTopping'
-import DeleteTopping from './pages/DashboardPage/Topping/DeleteTopping'
 import MemberPage from './pages/MemberPage/MemberPage'
 import OrderPage from './pages/MemberPage/OrderPage'
 import Category from './pages/DashboardPage/Category/Category'
@@ -66,15 +63,12 @@ function App() {
                     <Route path='/dashboard/menu' element={<Menu />} />
                     <Route path='/dashboard/menu/createMenu' element={<CreateMenu />} />
                     <Route path='/dashboard/menu/editMenu/:id' element={<EditMenu />} />
-                    <Route path='/dashboard/menu/deleteMenu/:id' element={<DeleteMenu />} />
                     <Route path='/dashboard/category' element={<Category />} />
                     <Route path='/dashboard/category/createCategory' element={<CreateCategory />} />
                     <Route path='/dashboard/category/editCategory/:id' element={<EditCategory />} />
-                    <Route path='/dashboard/category/deleteCategory/:id' element={<DeleteCategory />} />
                     <Route path='/dashboard/topping' element={<Topping />} />
                     <Route path='/dashboard/topping/createTopping' element={<CreateTopping />} />
                     <Route path='/dashboard/topping/editTopping/:id' element={<EditTopping />} />
-                    <Route path='/dashboard/topping/deleteTopping/:id' element={<DeleteTopping />} />
                     <Route path="*" element={<Navigate to="/" />} />
                   </>
                 ) : (userProfile?.role == "customer") ? (

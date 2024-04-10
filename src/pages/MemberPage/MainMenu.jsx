@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from 'react'
-export default function MainMenu({ menu, topping, category,handleResponse,setHandleResponse }) {
+export default function MainMenu({ menu, topping, category, handleResponse, setHandleResponse }) {
 
     const [selectedCategory, setSelectedCategory] = useState("")
     const [count, setCount] = useState([])
@@ -15,28 +15,21 @@ export default function MainMenu({ menu, topping, category,handleResponse,setHan
         }
     }, [menu]);
 
-   
-    const handlePositiveChange = (menuId, newCount) => {
+    const handlePositiveChange = (menuId) => {
         setCount(prevCount => ({
             ...prevCount,
-            [menuId]: newCount + 1
+            [menuId]: prevCount[menuId] + 1
         }));
     };
 
     const handleNegativeChange = (menuId, newCount) => {
         if (newCount > 1) {
-            setCount(prevCount => ({
-                ...prevCount,
-                [menuId]: newCount - 1
-            }));
+            setCount(prevCount => (
+                {
+                    ...prevCount,
+                    [menuId]: prevCount[menuId] - 1
+                }));
         }
-        else {
-            setCount(prevCount => ({
-                ...prevCount,
-                [menuId]: newCount
-            }));
-        }
-
     };
 
     const handleTopping = (toppingId, menuItemId) => {
@@ -61,14 +54,12 @@ export default function MainMenu({ menu, topping, category,handleResponse,setHan
     const postCartToAPI = async (menuId) => {
         try {
             const index = [...selectedTopping].findIndex((item) => item.menuItemId === menuId);
-            console.log("index", index)
             const newItem = {
                 menu_id: menuId,
                 quantity: count[menuId],
                 topping: selectedTopping?.[index]?.['toppingIds'] || [],
                 comment: ""
             }
-
             // Make the POST request to the API endpoint
             const token = window.localStorage.getItem('token')
             await axios.post('https://bubble-tea-cafe-api-production.up.railway.app/api/auth/add-to-cart', newItem,
@@ -79,15 +70,12 @@ export default function MainMenu({ menu, topping, category,handleResponse,setHan
                 }
             ).then((response) => {
                 console.log('Item posted successfully:', response.data.data);
-                setHandleResponse(prevHandleResponse => [...prevHandleResponse,response.data.data])
+                setHandleResponse(prevHandleResponse => [...prevHandleResponse, response.data.data])
                 console.log(handleResponse)
-                //window.location.href = "/member"
-                //setCart([])
             });
 
 
         } catch (error) {
-            // Handle any errors
             console.error('Error posting cart items:', error);
         }
 
@@ -145,7 +133,7 @@ export default function MainMenu({ menu, topping, category,handleResponse,setHan
                                                 <div className="mood">
                                                     <p><b>Quantity</b></p>
                                                     <div className="type-select type-select-emoji">
-                                                        <button className='add-button' onClick={() => handlePositiveChange(m.Id, count[m.Id])}>+</button>
+                                                        <button className='add-button' onClick={() => handlePositiveChange(m.Id)}>+</button>
                                                         <p className='count'>{count[m.Id]}</p>
                                                         <button className='minus-button' onClick={() => handleNegativeChange(m.Id, count[m.Id])}>-</button>
                                                     </div>

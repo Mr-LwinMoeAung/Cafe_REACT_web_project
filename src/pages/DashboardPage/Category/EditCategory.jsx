@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useCategory } from "../../../layouts/BaseLayout"
 import AdminNavbar from "../../../components/Admin/AdminNavbar"
+import UpperNavbar from "../../../components/Admin/UpperNavbar"
 
 export default function EditCategory() {
     const category = useCategory()
@@ -43,6 +44,7 @@ export default function EditCategory() {
 
     return (
         <>
+            <UpperNavbar />
             <AdminNavbar />
             <div className="create-menu-container">
                 <h2 className="create-menu-h2">Edit Category Item</h2>

@@ -5,7 +5,7 @@ export default function AdminNavbar() {
     return (
         <nav className="main-nav">
             <div className="logo">
-                <a href="/">
+                <a className="logo-link" href="/">
                     <img
                         className="navimg"
                         src="https://clipart-library.com/img/1695731.png"
@@ -13,7 +13,7 @@ export default function AdminNavbar() {
                 </a>
             </div>
             <div className="nav-items">
-                <a href="/dashboard">
+                <a className="logo-link" href="/dashboard">
                     <img
                         className="navimg"
                         src="/src/assets/img/home.png"
@@ -22,7 +22,7 @@ export default function AdminNavbar() {
                 </a>
             </div>
             <div className="nav-items">
-                <a href="/dashboard/menu">
+                <a className="logo-link" href="/dashboard/menu">
                     <img
                         className="navimg"
                         src="/src/assets/img/clipboard.png"
@@ -31,7 +31,7 @@ export default function AdminNavbar() {
                 </a>
             </div>
             <div className="nav-items">
-                <a href="/dashboard/category">
+                <a className="logo-link" href="/dashboard/category">
                     <img
                         className="navimg"
                         src="/src/assets/img/category.png"
@@ -40,7 +40,7 @@ export default function AdminNavbar() {
                 </a>
             </div>
             <div className="nav-items">
-                <a href="/dashboard/topping">
+                <a className="logo-link" href="/dashboard/topping">
                     <img
                         className="navimg"
                         src="/src/assets/img/topping.png"
@@ -49,7 +49,7 @@ export default function AdminNavbar() {
                 </a>
             </div>
             <div className="nav-items">
-                <a href="/" onClick={handleLogout}>
+                <a className="logo-link" href="/" onClick={handleLogout}>
                     <img
                         className="navimg"
                         src="/src/assets/img/logout.png"
