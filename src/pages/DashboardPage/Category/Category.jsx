@@ -5,9 +5,14 @@ import './Category.css'
 import UpperNavbar from "../../../components/Admin/UpperNavbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Modal from "../../../components/Modal/DeleteModal";
+import DeleteModal from "../../../components/Modal/DeleteModal";
 
 export default function Category() {
-    const [categories,setCategories] = useCategory()
+    const [isOpen, setIsOpen] = useState(false)
+    const [isDelete, setIsDelete] = useState(false)
+    const [categoryId, setCategoryId] = useState(null)
+    const [categories, setCategories] = useCategory()
     const deleteItem = async (id) => {
         try {
             const token = window.localStorage.getItem('token')
@@ -30,8 +35,15 @@ export default function Category() {
         }
     };
 
+    useEffect(() => {
+        if (isDelete) {
+            deleteItem(categoryId)
+        }
+    }, [isDelete])
+
     return (
         <>
+            <DeleteModal open={isOpen} setIsOpen={setIsOpen} setIsDelete={setIsDelete} />
             <div className="category-table">
                 <AdminNavbar />
                 <section className="main-category">
@@ -58,15 +70,19 @@ export default function Category() {
                                                         <Link className='table-btn edit-category-btn' to={`/dashboard/category/editCategory/${c.Id}`}>Edit</Link>
                                                     </td>
                                                     <td>
-                                                        <a className="table-btn delete-category-btn" onClick={() => deleteItem(c.Id)}>Delete</a>
+                                                        <a className="table-btn delete-category-btn" onClick={() => {
+                                                            setIsOpen(true)
+                                                            setCategoryId(c.Id)
+                                                        }
+                                                        }>Delete</a>
                                                     </td>
                                                 </tr>
                                             )
                                             )) : (<tr>
-                                            <td colSpan="3">
-                                                No Category
-                                            </td>
-                                        </tr>)
+                                                <td colSpan="3">
+                                                    No Category
+                                                </td>
+                                            </tr>)
                                     }
                                 </tbody>
                             </table>

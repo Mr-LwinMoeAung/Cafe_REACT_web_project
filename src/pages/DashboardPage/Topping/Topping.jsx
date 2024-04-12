@@ -4,9 +4,14 @@ import { useTopping } from "../../../layouts/BaseLayout";
 import './Topping.css'
 import UpperNavbar from "../../../components/Admin/UpperNavbar";
 import axios from "axios";
+import DeleteModal from "../../../components/Modal/DeleteModal";
+import { useEffect, useState } from "react";
 
 export default function Topping() {
-    const [toppings,setToppings] = useTopping()
+    const [isOpen, setIsOpen] = useState(false)
+    const [isDelete, setIsDelete] = useState(false)
+    const [toppingId, setToppingId] = useState(null)
+    const [toppings, setToppings] = useTopping()
     const deleteItem = async (id) => {
         try {
             const token = window.localStorage.getItem('token')
@@ -29,8 +34,15 @@ export default function Topping() {
         }
     };
 
+    useEffect(() => {
+        if (isDelete) {
+            deleteItem(toppingId)
+        }
+    }, [isDelete])
+
     return (
         <>
+            <DeleteModal open={isOpen} setIsOpen={setIsOpen} setIsDelete={setIsDelete} />
             <div className="topping-table">
                 <AdminNavbar />
                 <section className="main-category">
@@ -60,7 +72,8 @@ export default function Topping() {
                                                         <Link className='table-btn edit-topping-btn' to={`/dashboard/topping/editTopping/${t.Id}`}>Edit</Link>
                                                     </td>
                                                     <td>
-                                                        <a className="table-btn delete-topping-btn" onClick={() => deleteItem(t.Id)}>Delete</a>
+                                                        <a className="table-btn delete-topping-btn" onClick={() => { setIsOpen(true)
+                                                             setToppingId(t.Id) }}>Delete</a>
                                                     </td>
                                                 </tr>
                                             )

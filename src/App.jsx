@@ -21,6 +21,7 @@ import Topping from './pages/DashboardPage/Topping/Topping'
 import Menu from './pages/DashboardPage/Menu/Menu'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import PopUpPage from './pages/PopUpPage'
 
 function App() {
   const [userProfile, setUserProfile] = useState()
@@ -55,6 +56,7 @@ function App() {
             <Route path="/review" element={<ReviewPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path='/popup' element={<PopUpPage />} />
             {
               userProfile ? (
                 (userProfile?.role == "staff") ? (

@@ -5,13 +5,14 @@ import './DashboardPage.css'
 import axios from 'axios';
 import UpperNavbar from '../../components/Admin/UpperNavbar';
 import AdminOrder from './Order/AdminOrder';
+import DeleteModal from '../../components/Modal/DeleteModal';
 
 export default function DashboardPage() {
     const [menu] = useMenu()
     const [category] = useCategory()
     const [topping] = useTopping()
     const [user] = useUserProfile()
-    const [allUser, setAllUser] = useState([])
+    const [allUser, setAllUser] = useState([]) 
     const [order, setOrder] = useState(null)
     const getOrder = async () => {
         try {
@@ -58,10 +59,13 @@ export default function DashboardPage() {
     useEffect(() => {
         getAllUser()
         getOrder()
-    }, [user,order])
+    }, [user, order])
+
+   
 
     return (
         <>
+           
             <div className="lma-admin-main-container">
                 <AdminNavbar />
                 <section className="main-category">

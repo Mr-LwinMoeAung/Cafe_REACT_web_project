@@ -5,7 +5,7 @@ import { useCategory } from "../../../layouts/BaseLayout"
 import AdminNavbar from "../../../components/Admin/AdminNavbar"
 
 export default function CreateMenu() {
-    const category = useCategory()
+    const [category ]= useCategory()
     const [formData, setFormData] = useState({
         name: "",
         description: "",
