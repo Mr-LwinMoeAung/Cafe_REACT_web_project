@@ -5,7 +5,6 @@ import './Category.css'
 import UpperNavbar from "../../../components/Admin/UpperNavbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Modal from "../../../components/Modal/DeleteModal";
 import DeleteModal from "../../../components/Modal/DeleteModal";
 
 export default function Category() {
@@ -39,6 +38,7 @@ export default function Category() {
         if (isDelete) {
             deleteItem(categoryId)
         }
+        setIsDelete(false)
     }, [isDelete])
 
     return (
@@ -88,7 +88,9 @@ export default function Category() {
                             </table>
                         </div>
                         <div className="table-create-category">
-                            <Link className='table-btn create-category-btn' to={`/dashboard/category/createCategory`}>Create Category</Link>
+                            <Link className='table-btn create-category-btn' to={
+                                `/dashboard/category/createCategory`
+                            }>Create Category</Link>
                         </div>
                     </div>
                 </section>

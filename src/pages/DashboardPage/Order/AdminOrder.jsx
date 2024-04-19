@@ -76,7 +76,6 @@ export default function AdminOrder({ allUser, menu, getToppingName, order, setOr
             <div id="C4" className="item-order-part">
                 <div className="item-order-header">
                     <h3>Pending Orders</h3>
-                    <a onClick={() => handleSort()} className="item-sort-button" >Sort {sort}</a>
                 </div>
 
                 <div className="modify-table">
@@ -134,7 +133,6 @@ export default function AdminOrder({ allUser, menu, getToppingName, order, setOr
             <div id="C5" className="item-order-part">
                 <div className="item-order-header">
                     <h3>Completed Orders</h3>
-                    <a onClick={() => handleSort()} className="item-sort-button">Sort {sort}</a>
                 </div>
                 <div className="modify-table">
                     <table>

@@ -28,8 +28,8 @@ export default function MemberPage() {
                     <div className="user">
                         {
                             user ? (
-                                <a className="user-profile-link" href="#">
-                                    <h3 className="user-profile-text"><b>{user.username}'s Dashboard</b></h3>
+                                <a className="user-profile-link user-profile-member" href="#">
+                                   {user.username}'s Dashboard
                                 </a>
                             ) : ("no user information")
                         }

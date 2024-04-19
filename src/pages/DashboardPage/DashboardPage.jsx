@@ -78,9 +78,9 @@ export default function DashboardPage() {
                                     className="img-category"
                                     src="/src/assets/img/checklist.png"
                                 />
-                                <p4
+                                <p
                                 >{menu ? menu.length : 0} items<br />
-                                    <span className="item-menu-watertext">Menu</span></p4
+                                    <span className="item-menu-watertext">Menu</span></p
                                 >
                             </div>
                         </a>
@@ -90,9 +90,9 @@ export default function DashboardPage() {
                                     className="img-category"
                                     src="/src/assets/img/categories.png"
                                 />
-                                <p4
+                                <p
                                 >{category ? category.length : 0} Categories<br />
-                                    <span className="item-menu-watertext">Category</span></p4
+                                    <span className="item-menu-watertext">Category</span></p
                                 >
                             </div>
                         </a>
@@ -102,9 +102,9 @@ export default function DashboardPage() {
                                     className="img-category"
                                     src="https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/purchase_order-512.png"
                                 />
-                                <p4
+                                <p
                                 >{order ? order.length : 0} Orders<br />
-                                    <span className="item-menu-watertext">Orders</span></p4
+                                    <span className="item-menu-watertext">Orders</span></p
                                 >
                             </div>
                         </a>
@@ -114,9 +114,9 @@ export default function DashboardPage() {
                                     className="img-category"
                                     src="/src/assets/img/user.png"
                                 />
-                                <p4
+                                <p
                                 >{allUser ? allUser.length : 0} <br />
-                                    <span className="item-menu-watertext">Clients</span></p4
+                                    <span className="item-menu-watertext">Clients</span></p
                                 >
                             </div>
                         </a>

@@ -378,6 +378,10 @@ body {
                 opacity: 0.8;
             }
 
+            .user-profile-member{
+                justify-content: center;
+            }
+
             .user-profile-text {
                 display: inline-block;
                 vertical-align: text-top;

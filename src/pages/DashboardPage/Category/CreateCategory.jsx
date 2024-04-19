@@ -3,7 +3,7 @@ import './Category.css'
 import { useState } from "react"
 import AdminNavbar from "../../../components/Admin/AdminNavbar"
 
-export default function CreateCategory() {
+const CreateCategory = () => {
     const [name, setName] = useState("")
 
     const handleSubmit = async (e) => {
@@ -14,14 +14,15 @@ export default function CreateCategory() {
                 "https://bubble-tea-cafe-api-production.up.railway.app/api/category",
                 { name: name }
                 , {
-                headers: {
-                    Authorization: `${token}`
+                    headers: {
+                        Authorization: `${token}`
+                    }
                 }
-                }
-                ).then((response) => {
-                    window.location.href = '/dashboard/category'
-                    console.log(response)
-                })
+            ).then((response) => {
+                setIsCreateOpen(true)
+                window.location.href = '/dashboard/category'
+                console.log(response)
+            })
         } catch (error) {
             console.log(error)
         }
@@ -44,3 +45,4 @@ export default function CreateCategory() {
         </>
     )
 }
+export default CreateCategory
