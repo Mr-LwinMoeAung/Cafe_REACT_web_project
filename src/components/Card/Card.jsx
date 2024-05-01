@@ -19,7 +19,7 @@ export default function Card({ rating, name, price, img, description }) {
                 )}
 
 
-                <img src="./src/assets/img/icons-small-cart.png" alt="cart" />
+                <a href="/member"><img src="./src/assets/img/icons-small-cart.png" alt="cart" /></a>
             </div>
         </div>
     )

@@ -429,6 +429,7 @@ body {
             }
 
             .bills-coffee {
+                flex-wrap: wrap;
                 margin-bottom: 8%;
                 display: flex;
                 align-items: center;

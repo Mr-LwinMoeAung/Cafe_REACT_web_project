@@ -17,7 +17,7 @@ export default function AboutPage() {
                                 secret
                                 recipe and available in stores worldwide.
                             </div>
-                            <div className="btn"><a href="#">Get your coffee</a></div>
+                            <div className="btn"><a href="/member">Get your coffee</a></div>
                         </div>
                     </div>
                 </div>
